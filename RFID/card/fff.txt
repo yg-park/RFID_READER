@@ -1,0 +1,31 @@
+
+					/*  // 도현이형 코드
+					CRect m_rect;
+					CClientDC dc(this);
+
+					if (m_image)
+					{
+						m_image.Destroy();
+						DeleteObject(m_image);
+					}
+
+					HBITMAP m_Bmp = ((CStatic*)GetDlgItem(IDC_PIC))->SetBitmap(m_image);
+					if (m_Bmp)
+						::DeleteObject(m_Bmp);
+
+					m_image.Load(L"img/wine/Chateau Petrus.jpg");
+
+					if (m_image == NULL) return;
+
+					((CStatic*)GetDlgItem(IDC_PIC))->GetWindowRect(m_rect);
+					ScreenToClient(&m_rect);
+
+					m_image.Draw(dc, m_rect);
+
+					// 비고 출력 부분
+					m_strBeego = cbeego;
+
+					// 이름 출력 부분
+					m_strNamE = cname;
+					//UpdateData(FALSE);
+					*/

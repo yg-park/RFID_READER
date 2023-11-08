@@ -1,0 +1,149 @@
+// book
+if (is_WriteReadCommand(ftHandle, CM1_ISO14443AB, CM2_ISO14443A_ACTIVE + BUZZER_ON,  //ISO14443A모드로 읽기
+	writeLength, wirteData, &readLength, readData) == IS_OK ||
+	is_WriteReadCommand(ftHandle, CM1_ISO15693, CM2_ISO15693_ACTIVE + BUZZER_ON,  //ISO15693모드로 읽기
+		writeLength, wirteData, &readLength, readData) == IS_OK)
+{
+	for (int i = 0; i < readLength; i++)
+	{
+		temp.Format(_T("%02x "), readData[i]);
+		temp1 += temp;
+	}
+	printf("UID : %02S ", temp1);
+	printf("\n");
+
+	if (NULL == conn_result)
+	{
+		std::cout << "DB Connection Fail" << std::endl;
+	}
+	else
+	{
+		std::cout << "DB Connection Success" << std::endl;
+		PlaySoundW(_T("bubble.wav"), NULL, SND_FILENAME | SND_ASYNC);  // 소리 재생 부분
+
+		if (!(temp1.Compare(temp5)))
+		{
+			sprintf_s(query, 1024, "SELECT * FROM book WHERE name = 'The Great Gatsby'");  //14443 - 81935120
+
+			if (mysql_query(conn, query))  // Send Query
+			{
+				std::cout << "SELECT Fail" << std::endl;
+			}
+
+			result = mysql_store_result(conn);
+			int fields = mysql_num_fields(result);    // 필드 갯수 구함            
+
+			while (row = mysql_fetch_row(result))     // 모든 레코드 탐색
+			{
+				cname = row[1];
+				cbeego = row[2];
+				cimage = row[3];
+
+				image.Load(cimage);
+
+				image.StretchBlt(dc->m_hDC, 0, 0, rect.Width(), rect.Height(), SRCCOPY);//이미지를 픽쳐 컨트롤 크기로 조정
+				ReleaseDC(dc);//DC 해제
+
+				m_strBeego = cbeego;  // 비고 출력 부분
+				m_strNamE = cname;  // 이름 출력 부분
+				UpdateData(FALSE);
+				mysql_free_result(result);
+				mysql_close(conn);
+			}
+		}
+
+		if (!(temp1.Compare(temp6)))
+		{
+			sprintf_s(query, 1024, "SELECT * FROM book WHERE name = 'Les Miserables'");  //14443 - f10c9daf
+
+			if (mysql_query(conn, query))  // Send Query
+			{
+				std::cout << "SELECT Fail" << std::endl;
+			}
+
+			result = mysql_store_result(conn); 
+			int fields = mysql_num_fields(result);    // 필드 갯수 구함            
+
+			while (row = mysql_fetch_row(result))     // 모든 레코드 탐색
+			{
+				cname = row[1];
+				cbeego = row[2];
+				cimage = row[3];
+
+				image.Load(cimage);
+
+				image.StretchBlt(dc->m_hDC, 0, 0, rect.Width(), rect.Height(), SRCCOPY);//이미지를 픽쳐 컨트롤 크기로 조정
+				ReleaseDC(dc);//DC 해제
+
+				m_strBeego = cbeego;  // 비고 출력 부분
+				m_strNamE = cname;  // 이름 출력 부분
+				UpdateData(FALSE);
+				mysql_free_result(result);
+				mysql_close(conn);
+			}
+		}
+
+		if (!(temp1.Compare(temp7)))
+		{
+			sprintf_s(query, 1024, "SELECT * FROM book WHERE name = 'Faust'");  //15693 - 2ad768cb500104e0
+
+			if (mysql_query(conn, query))  // Send Query
+			{
+				std::cout << "SELECT Fail" << std::endl;
+			}
+
+			result = mysql_store_result(conn);  
+			int fields = mysql_num_fields(result);    // 필드 갯수 구함            
+
+			while (row = mysql_fetch_row(result))     // 모든 레코드 탐색
+			{
+				cname = row[1];
+				cbeego = row[2];
+				cimage = row[3];
+
+				image.Load(cimage);
+
+				image.StretchBlt(dc->m_hDC, 0, 0, rect.Width(), rect.Height(), SRCCOPY);//이미지를 픽쳐 컨트롤 크기로 조정
+				ReleaseDC(dc);//DC 해제
+
+				m_strBeego = cbeego;  // 비고 출력 부분
+				m_strNamE = cname;  // 이름 출력 부분
+				UpdateData(FALSE);
+				mysql_free_result(result);
+				mysql_close(conn);
+			}
+		}
+
+		if (!(temp1.Compare(temp8)))
+		{
+			sprintf_s(query, 1024, "SELECT * FROM book WHERE name = 'Harry Potter'");  //15693 - 3efe68cb500104e0
+
+			if (mysql_query(conn, query))  // Send Query
+			{
+				std::cout << "SELECT Fail" << std::endl;
+			}
+
+			result = mysql_store_result(conn); 
+			int fields = mysql_num_fields(result);    // 필드 갯수 구함            
+
+			while (row = mysql_fetch_row(result))     // 모든 레코드 탐색
+			{
+				cname = row[1];
+				cbeego = row[2];
+				cimage = row[3];
+
+				image.Load(cimage);
+
+				image.StretchBlt(dc->m_hDC, 0, 0, rect.Width(), rect.Height(), SRCCOPY);//이미지를 픽쳐 컨트롤 크기로 조정
+				ReleaseDC(dc);//DC 해제
+
+				m_strBeego = cbeego;  // 비고 출력 부분
+				m_strNamE = cname;  // 이름 출력 부분
+				UpdateData(FALSE);
+				mysql_free_result(result);
+				mysql_close(conn);
+			}
+		}
+	}
+}
+   
